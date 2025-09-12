@@ -1,0 +1,74 @@
+{
+  "id": "emotional-dependency-3section",
+  "name": "Diagnóstico de Dependência Emocional - 3 Seções",
+  "layout": "3section",
+  "theme": {
+    "primary": "#1a4d4d",
+    "secondary": "#2d7d7d",
+    "background": "#ffffff",
+    "text": "#2d2d2d",
+    "accent": "#d4af37"
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "type": "hero",
+      "order": 1,
+      "content": {
+        "logo": "/images/logo-resgate-dos-otimistas.png",
+        "title": "O REGISTRO O SEU SUCESSO",
+        "subtitle": "Faça sua diagnostica de DEPENDENCIA EMOCIONAL GRATUITO",
+        "description": "Descubra como AUMENTAR O SEU NÍVEL DE PERMISSÃO e melhorar seus resultados nas finanças, nos relacionamentos e na saúde.",
+        "ctaText": "PARTICIPAR GRATUITAMENTE",
+        "eventDetails": {
+          "isFree": true,
+          "dates": "01, 02 e 03/06",
+          "time": "19h30"
+        }
+      },
+      "styling": {
+        "textAlign": "center",
+        "maxWidth": "800px"
+      }
+    },
+    {
+      "id": "journey",
+      "type": "journey",
+      "order": 2,
+      "content": {
+        "title": "Que bom que você não desistiu.",
+        "description": "Chegou de dar o seu máximo e no fim ficar se questionando o que falhou. Depois disso você precisa ir na pergunta: o que falta para você ter o resultado merecido da palma da sua mão? Faça parte do Resgate das Emoções ou continue se questionando e buscando o seu \"quase sucesso\".",
+        "backgroundImage": "/images/bg-journey.png",
+        "ctaText": "PARTICIPAR GRATUITAMENTE"
+      }
+    },
+    {
+      "id": "mentor",
+      "type": "mentor",
+      "order": 3,
+      "content": {
+        "title": "QUEM VAI SER O SEU MENTOR NESSA JORNADA?",
+        "mentorName": "Elson Euler",
+        "mentorTitle": "Líder e Idealizador da Aliança Divergente",
+        "mentorImage": "/images/mentor-image.png",
+        "mentorBio": "Elson Euler é um líder experiente que superou grandes desafios e impactou milhares de vidas através de seu trabalho na Aliança Divergente. Sua jornada de superação e crescimento pessoal o tornou um mentor respeitado e admirado por todos que o conhecem.",
+        "ctaText": "PARTICIPAR GRATUITAMENTE"
+      }
+    },
+    {
+      "id": "footer",
+      "type": "footer",
+      "order": 4,
+      "content": {
+        "copyright": "Todos os direitos reservados. Proibida a reprodução total ou parcial.",
+        "privacyPolicy": "TERMOS DE USO E POLÍTICA DE PRIVACIDADE",
+        "logo": "/images/logo-otimistas.png"
+      }
+    }
+  ],
+  "metadata": {
+    "title": "Diagnóstico de Dependência Emocional - 3 Seções",
+    "description": "Descubra como aumentar seu nível de permissão e melhorar seus resultados",
+    "ogImage": "/images/emotional-dependency-3section-og.png"
+  }
+}

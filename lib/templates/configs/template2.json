@@ -1,0 +1,71 @@
+{
+  "id": "emotional-dependency-light",
+  "name": "Diagnóstico de Dependência Emocional - Tema Claro",
+  "layout": "1column",
+  "theme": {
+    "primary": "#2d7d7d",
+    "secondary": "#4a9e9e",
+    "background": "#f8f6f1",
+    "text": "#2d2d2d",
+    "accent": "#8b4513"
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "type": "hero",
+      "order": 1,
+      "content": {
+        "logo": "/images/logo-resgate-dos-otimistas.png",
+        "title": "FAÇA SEU DIAGNÓSTICO DE DEPENDÊNCIA EMOCIONAL",
+        "subtitle": "GRATUITO",
+        "description": "Descubra como AUMENTAR O SEU NÍVEL DE PERMISSÃO e melhorar seus resultados nas finanças, nos relacionamentos e na saúde.",
+        "ctaText": "PARTICIPAR GRATUITAMENTE",
+        "eventDetails": {
+          "isFree": true,
+          "dates": "01, 02 E 03/09",
+          "time": "19H55"
+        }
+      },
+      "styling": {
+        "textAlign": "center",
+        "maxWidth": "800px"
+      }
+    },
+    {
+      "id": "form",
+      "type": "form",
+      "order": 2,
+      "content": {
+        "title": "Preencha os campos abaixo agora:",
+        "fields": [
+          {
+            "type": "email",
+            "label": "Seu melhor e-mail:",
+            "placeholder": "Seu melhor e-mail...",
+            "required": true
+          },
+          {
+            "type": "whatsapp",
+            "label": "Seu WhatsApp:",
+            "placeholder": "Seu WhatsApp...",
+            "required": true
+          }
+        ],
+        "submitText": "PARTICIPAR GRATUITAMENTE"
+      }
+    },
+    {
+      "id": "footer",
+      "type": "footer",
+      "order": 3,
+      "content": {
+        "copyright": "© 2024. All rights reserved. Política de Privacidade"
+      }
+    }
+  ],
+  "metadata": {
+    "title": "Diagnóstico de Dependência Emocional Gratuito",
+    "description": "Descubra como aumentar seu nível de permissão e melhorar seus resultados",
+    "ogImage": "/images/emotional-dependency-light-og.png"
+  }
+}
