@@ -32,7 +32,21 @@ export default function Formv1() {
 
   const fullUrl = Object.values(params).flat().join("/");
 
-  const launch = "[ORO] [SET25]";
+  const getLaunchTag = () => {
+    const temperatureMap = {
+      f: "Frio",
+      m: "Morno", 
+      q: "Quente",
+      org: "Organico"
+    };
+    
+    const temperaturaKey = (temperatura || "").toLowerCase();
+    const temperaturaLabel = temperatureMap[temperaturaKey as keyof typeof temperatureMap] || "Frio";
+    
+    return `[OFRR] [OUT25] [${temperaturaLabel}]`;
+  };
+
+  const launch = getLaunchTag();
 
   // Capturar o domínio da página
   useEffect(() => {
