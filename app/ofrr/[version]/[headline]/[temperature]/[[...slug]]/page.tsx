@@ -216,7 +216,7 @@ export default function Home() {
         </div>
         <div className="container mx-auto px-4 pt-5 pb-8 lg:w-[950px] w-auto">
           <div className="md:grid lg:grid-cols-[auto_1fr] md:grid-cols-[auto_auto] lg:gap-10 gap-4 items-start flex flex-col w-full px-4">
-            <div className="max-w-[328px] hidden md:flex">
+            <div className="max-w-[328px] hidden md:flex 2xl:mt-10">
               <Image
                 src="/images/ofrr/v1/rosa-bem-me-quer.png"
                 alt="DEPENDÊNCIA EMOCIONAL"
@@ -225,7 +225,7 @@ export default function Home() {
                 className="object-contain w-full"
               />
             </div>
-            <div className="md:pt-14 pt-36 lg:text-2xl text-[17px]/1 text-[#104448] font-bold">
+            <div className="md:pt-14 pt-36 lg:text-2xl text-[17px]/1 text-[#104448] font-bold 2xl:mt-10">
               O Workshop{" "}
               <span className="text-[#C0964B]">“O FIM DAS RELAÇÕES RUINS”</span>{" "}
               é para você, que está{" "}

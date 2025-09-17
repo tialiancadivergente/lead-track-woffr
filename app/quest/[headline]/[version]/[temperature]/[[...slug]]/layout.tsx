@@ -6,9 +6,9 @@ import GoogleTagManager from "@/app/components/GoogleTagManager"
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-    title: "O Resgate dos Otimistas - Diagnóstico de Dependência Emocional",
+    title: "O Fim das Relações Ruins - o método que poupa seu tempo e te conecta com o parceiro ideal",
     description:
-      "Faça seu diagnóstico de dependência emocional gratuito e descubra como aumentar seu nível de permissão.",
+      "Comprovado por mais de 53 mil mulheres.",
   }
 
 export default function QuizLayout({ children }: { children: React.ReactNode }) {

@@ -36,8 +36,6 @@ export default function Quiz({ params }: { params: { form: string } }) {
   const [versao, setVersao] = useState<string | null>(null);
   const [domain, setDomain] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
-  const [weightsV2, setWeightsV2] = useState<Record<number, number>>({});
-  const [totalScoreV2, setTotalScoreV2] = useState(0);
   const [hasSent, setHasSent] = useState(false);
 
 	const mapTagSendFlow = useCallback(() => ({
@@ -125,29 +123,16 @@ export default function Quiz({ params }: { params: { form: string } }) {
 
       // Calculate the faixa based on totalScore
       let faixa;
-      if (totalScore >= 215) {
+      if (totalScore >= 200) {
         faixa = "Faixa A";
-      } else if (totalScore >= 194) {
+      } else if (totalScore >= 182) {
         faixa = "Faixa B";
-      } else if (totalScore >= 162) {
+      } else if (totalScore >= 151) {
         faixa = "Faixa C";
-      } else if (totalScore >= 148) {
+      } else {
         faixa = "Faixa D";
-      } else {
-        faixa = "Faixa E";
       }
-
-      let faixaV2;
-      if (totalScoreV2 >= 200) {
-        faixaV2 = "Faixa A";
-      } else if (totalScoreV2 >= 182) {
-        faixaV2 = "Faixa B";
-      } else if (totalScoreV2 >= 151) {
-        faixaV2 = "Faixa C";
-      } else {
-        faixaV2 = "Faixa D";
-      }
-
+      
       // Prepare detailed answers with questions and selected options
       const detailedAnswers: Record<string, string> = {};
       Object.entries(answers).forEach(([questionId, answerValue]) => {
@@ -170,9 +155,7 @@ export default function Quiz({ params }: { params: { form: string } }) {
         phone: phoneParam,
         answers: answers,
         totalScore: Math.round(totalScore),
-        totalScoreV2: Math.round(totalScoreV2),
         faixa: faixa,
-        faixaV2: faixaV2,
         tipo: tipo,
         version: versao,
         temperature: temperatura,
@@ -250,14 +233,9 @@ export default function Quiz({ params }: { params: { form: string } }) {
     if (selectedOption) {
       const newAnswers = { ...answers, [question.id]: value };
       const newWeights = { ...weights, [question.id]: selectedOption.weight };
-      const newWeightsV2: Record<number, number> = {
-        ...weightsV2,
-        [question.id]: selectedOption.weightV2 || 0,
-      };
 
       setAnswers(newAnswers);
       setWeights(newWeights);
-      setWeightsV2(newWeightsV2);
     }
   };
 
@@ -271,10 +249,6 @@ export default function Quiz({ params }: { params: { form: string } }) {
         (sum, weight) => sum + weight,
         0
       );
-      let scoreV2 = Object.values(weightsV2).reduce(
-        (sum, weight) => sum + weight,
-        0
-      );
 
       // // Adicionar pontuação extra baseada na URL
       // const publicoScore = window.location.href.indexOf('f-typ') !== -1 ||
@@ -283,7 +257,6 @@ export default function Quiz({ params }: { params: { form: string } }) {
 
       // score += publicoScore;
       setTotalScore(score);
-      setTotalScoreV2(scoreV2);
       setCompleted(true);
     }
   };
@@ -312,15 +285,7 @@ export default function Quiz({ params }: { params: { form: string } }) {
       >
         {/* Background image with overlay */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#000000] via-[#0a3a4a] to-[#000000] opacity-100"></div>
-          <Image
-            src="https://resgatedosotimistas.com.br/wp-content/uploads/O-Resgate-dos-Otimistas-V7-TYP-Slice-1.webp"
-            alt="Background Resgate dos Otimistas"
-            fill
-            priority
-            className="object-cover object-center"
-            style={{ opacity: 0.3 }}
-          />
+          <div className="absolute inset-0 bg-[url('/images/ofrr/v1/bg-clouds.png')] bg-cover bg-center opacity-100"></div>
         </div>
 
         {/* Loading overlay */}
@@ -350,20 +315,12 @@ export default function Quiz({ params }: { params: { form: string } }) {
             <div className="w-full max-w-4xl mx-auto">
               <div className="mb-6 md:mb-8 flex justify-center">
                 <Image
-                  src="/images/logo-resgate-dos-otimistas.png"
-                  alt="Logotipo Resgate dos otimistas"
-                  width={
-                    typeof window !== "undefined" && window.innerWidth > 768
-                      ? 320
-                      : 158
-                  }
-                  height={
-                    typeof window !== "undefined" && window.innerWidth > 768
-                      ? 196
-                      : 70
-                  }
+                  src="/images/ofrr/o-fim-das-relacoes-ruins.png"
+                  alt="Logotipo O Fim das Relações Ruins"
+                  width={155}
+                  height={70}
                   priority
-                  className="object-contain select-none pointer-events-none"
+                  className="object-contain select-none pointer-events-none mb-8"
                   style={{
                     maxWidth: "100%",
                     height: "auto",
@@ -464,7 +421,7 @@ export default function Quiz({ params }: { params: { form: string } }) {
         </div>
       </section>
       {/* Rodapé com copyright */}
-      <footer className="w-full bg-black h-[150px] flex items-center justify-center">
+      <footer className="w-full bg-[#104448] py-10 flex items-center justify-center">
         <p
           className="text-gray-400 text-sm md:text-base text-center"
           style={{ color: "#fff", fontFamily: '"Roboto", Sans-serif' }}

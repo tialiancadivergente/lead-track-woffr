@@ -29,7 +29,6 @@ export default function Formv1() {
   const [isLogo, setIsLogo] = useState(true);
   const [isDark, setIsDark] = useState(true);
   const [isPicture, setIsPicture] = useState(false);
-  const [percent, setPercent] = useState<string | null>(null);
 
   const fullUrl = Object.values(params).flat().join("/");
 
@@ -89,27 +88,19 @@ export default function Formv1() {
   // Mapeamento dos benefícios para exibição
   const benefitsMapping = [
     {
-      id: 1,
+      id: "h1",
       isPicture: false,
       isLogo: true,
       title: (
         <p
-          className={`text-3xl md:text-4xl uppercase font-bold mx-auto leading-10 md:-leading-10 `}
+          className={`text-white lg:text-[34px] text-xl lg:leading-10 leading-7 font-semibold mb-1`}
         >
-          Pare de assistir pessoas que sabem menos do que você ganharem mais
+          Encontre um homem de valor até no Tinder.
         </p>
       ),
       text: (
-        <p
-          className={`text-2xl md:text-xl md:uppercase capitalize text-center`}
-        >
-          Você não está ficando para trás por falta de conhecimento ou de força
-          de vontade,{" "}
-          <span
-            className={`${isDark ? "text-[#c0964b]" : "text-bold"} font-bold`}
-          >
-            você está ficando para trás por falta de permissão.
-          </span>
+        <p>
+          O lugar influencia, mas seus padrões ocultos definem quem te nota e quem você aceita.
         </p>
       ),
     },
@@ -119,53 +110,32 @@ export default function Formv1() {
       isLogo: true,
       title: (
         <p
-          className={`text-2xl max-w-md lg:text-4xl uppercase font-bold leading-7 md:-leading-10 `}
+          className={`text-white lg:text-[34px] text-xl lg:leading-10 leading-7 font-semibold mb-1`}
         >
-          Tem gente que{" "}
-          <span className="text-[#c0964b]">estudou menos que você</span> e
-          ganhando bem mais
+          Descubra o segredo das mulheres que atraem homens de valor.
         </p>
       ),
       text: (
-        <p className={`text-[20px] lg:text-3xl px-6`}>
-          E esse ciclo se repete pela sua falta de permissão
+        <p>
+          Elas não são melhores que você, <span className="font-bold">mas romperam com os padrões ocultos que só atraem homens ruins.</span>
         </p>
       ),
     },
     {
-      id: 3,
-      isPicture: true,
-      isLogo: true,
-      title: (
-        <p
-          className={`text-3x max-w-lg md:text-4xl uppercase font-bold mx-auto leading-10 md:-leading-10 text-center md:text-left`}
-        >
-          Essa advogada saiu de R$3 mil para R$85 mil em menos de 60 dias
-        </p>
-      ),
-      text: (
-        <p
-          className={`text-2xl md:text-2xl max-w-lg mx-auto text-center md:text-left`}
-        >
-          Destrave o seu teto financeiro eliminando o seu bloqueio e permissão.
-          Capacidade e força de vontade você já tem.
-        </p>
-      ),
-    },
-    {
-      id: "h2",
+      id: "h3",
       isPicture: false,
       isLogo: true,
       title: (
         <p
-          className={`text-3x max-w-xl md:text-4xl uppercase font-bold mx-auto leading-10 md:-leading-10 `}
+          className={`text-[#C0964B] lg:text-[34px] text-xl lg:leading-10 leading-7 font-semibold mb-1`}
         >
-          Tem gente que estudou menos que você e ganhando bem mais
+          Relacionamentos ruins e vida financeira travada?
         </p>
       ),
       text: (
-        <p className={`text-2xl md:text-2xl max-w-sm mx-auto text-center`}>
-          E esse ciclo se repete pela sua falta de permissão
+        <p>
+          Elimine os 4 padrões que você repete inconscientemente que te impedem de ter o relacionamento que deseja...
+          <p className="font-bold">e até de ser mais próspera.</p>
         </p>
       ),
     },
@@ -479,6 +449,15 @@ export default function Formv1() {
                   </>
                 )}
               </div>
+
+              <p className="my-4 flex items-center text-white font-special-elite text-left lg:text-2xl text-sm sm:max-w-[60%] max-w-[390px] mx-auto md:mx-0">
+              {redLine ? (
+                <span>{redLine}</span>
+              ) : (
+                <>
+                </>
+              )}
+            </p>
 
               <p className="lg:text-2xl text-sm text-left text-white font-special-elite mt-6 md:w-full w-[390px] md:mx-0 mx-auto">
                 Comprovado por mais de 53 mil mulheres.
