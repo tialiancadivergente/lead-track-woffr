@@ -463,7 +463,7 @@ export default function Formv1() {
                 Comprovado por mais de 53 mil mulheres.
               </p>
               <p className="lg:text-2xl text-[14px] text-left text-[#C0964B] font-semibold mb-6 md:w-full w-[390px] md:mx-0 mx-auto">
-                24, 25 e 26 de fevereiro - às 20h (Horário de Brasília)
+                06, 07 e 08 de outubro - às 20h (Horário de Brasília)
               </p>
 
               <form

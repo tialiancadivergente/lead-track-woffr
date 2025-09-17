@@ -39,10 +39,10 @@ export default function Quiz({ params }: { params: { form: string } }) {
   const [hasSent, setHasSent] = useState(false);
 
 	const mapTagSendFlow = useCallback(() => ({
-		f: _params.slug?.includes("f25") ? "https://sndflw.com/i/oroset25ft" : "https://api.whatsapp.com/send?phone=5512936184013&text=Quero%20fazer%20meu%20diagn%C3%B3stico%20gratuito",
-		org: "https://api.whatsapp.com/send?phone=5512936182704&text=Quero%20fazer%20meu%20diagn%C3%B3stico%20gratuito",
-		m: "https://api.whatsapp.com/send?phone=5512936185472&text=Quero%20fazer%20meu%20diagn%C3%B3stico%20gratuito",
-		q: "https://api.whatsapp.com/send?phone=5512936184799&text=Quero%20fazer%20meu%20diagn%C3%B3stico%20gratuito",
+		f: "https://sndflw.com/i/ofrrf-out25",
+		org: "https://sndflw.com/i/ofrro-out25",
+		m: "https://sndflw.com/i/ofrrm-out25",
+		q: "https://sndflw.com/i/ofrrq-out25",
 	}), [_params.slug])();
 
   const getWhatsappUrl = () => {
@@ -54,7 +54,21 @@ export default function Quiz({ params }: { params: { form: string } }) {
     return mapTagSendFlow[resolvedKey as keyof typeof mapTagSendFlow] || mapTagSendFlow["f"];
   };
 
-  const launch = _params.slug?.includes("f25") ? "[ORO] [SET25] Frio25pc" : "[ORO] [SET25]";
+  const getLaunchTag = () => {
+    const temperatureMap = {
+      f: "Frio",
+      m: "Morno", 
+      q: "Quente",
+      org: "Organico"
+    };
+    
+    const temperaturaKey = (temperatura || "").toLowerCase();
+    const temperaturaLabel = temperatureMap[temperaturaKey as keyof typeof temperatureMap] || "Frio";
+    
+    return `[OFRR] [OUT25] [${temperaturaLabel}]`;
+  };
+
+  const launch = getLaunchTag();
 
   // Capturar o domínio da página
   useEffect(() => {

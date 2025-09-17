@@ -3,6 +3,6 @@
 import { redirect } from 'next/navigation';
 
 export default function Home() {
-  redirect('/ordo-v9-f');
+  redirect('/ofrr/v1/h3/f');
   return null;
 } 
