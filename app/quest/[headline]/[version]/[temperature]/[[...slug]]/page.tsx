@@ -54,21 +54,7 @@ export default function Quiz({ params }: { params: { form: string } }) {
     return mapTagSendFlow[resolvedKey as keyof typeof mapTagSendFlow] || mapTagSendFlow["f"];
   };
 
-  const getLaunchTag = () => {
-    const temperatureMap = {
-      f: "Frio",
-      m: "Morno", 
-      q: "Quente",
-      org: "Organico"
-    };
-    
-    const temperaturaKey = (temperatura || "").toLowerCase();
-    const temperaturaLabel = temperatureMap[temperaturaKey as keyof typeof temperatureMap] || "Frio";
-    
-    return `[OFRR] [OUT25] [${temperaturaLabel}]`;
-  };
-
-  const launch = getLaunchTag();
+  const launch = '[OFRR] [OUT25]'
 
   // Capturar o domínio da página
   useEffect(() => {
@@ -189,7 +175,7 @@ export default function Quiz({ params }: { params: { form: string } }) {
       };
 
       // Still send to GTM as before
-      TagManager.dataLayer({
+      TagManager.dataLayer?.({
         dataLayer: {
           event: "leadscore",
           ...gtmData,
