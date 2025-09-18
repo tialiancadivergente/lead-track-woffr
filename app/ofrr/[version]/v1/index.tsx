@@ -35,14 +35,15 @@ export default function Formv1() {
   const getLaunchTag = () => {
     const temperatureMap = {
       f: "Frio",
-      m: "Morno", 
+      m: "Morno",
       q: "Quente",
-      org: "Organico"
+      org: "Organico",
     };
-    
+
     const temperaturaKey = (temperatura || "").toLowerCase();
-    const temperaturaLabel = temperatureMap[temperaturaKey as keyof typeof temperatureMap] || "Frio";
-    
+    const temperaturaLabel =
+      temperatureMap[temperaturaKey as keyof typeof temperatureMap] || "Frio";
+
     return `[OFRR] [OUT25] [${temperaturaLabel}]`;
   };
 
@@ -114,7 +115,8 @@ export default function Formv1() {
       ),
       text: (
         <p>
-          O lugar influencia, mas seus padrões ocultos definem quem te nota e quem você aceita.
+          O lugar influencia, mas seus padrões ocultos definem quem te nota e
+          quem você aceita.
         </p>
       ),
     },
@@ -131,7 +133,10 @@ export default function Formv1() {
       ),
       text: (
         <p>
-          Elas não são melhores que você, <span className="font-bold">mas romperam com os padrões ocultos que só atraem homens ruins.</span>
+          Elas não são melhores que você,{" "}
+          <span className="font-bold">
+            mas romperam com os padrões ocultos que só atraem homens ruins.
+          </span>
         </p>
       ),
     },
@@ -148,8 +153,71 @@ export default function Formv1() {
       ),
       text: (
         <p>
-          Elimine os 4 padrões que você repete inconscientemente que te impedem de ter o relacionamento que deseja...
+          Elimine os 4 padrões que você repete inconscientemente que te impedem
+          de ter o relacionamento que deseja...
           <p className="font-bold">e até de ser mais próspera.</p>
+        </p>
+      ),
+    },
+    {
+      id: "h4",
+      isPicture: false,
+      isLogo: true,
+      title: (
+        <p
+          className={`text-[#C0964B] lg:text-[34px] text-xl lg:leading-10 leading-7 font-semibold mb-1`}
+        >
+          Você merece mais do que migalhas de amor.
+        </p>
+      ),
+      text: (
+        <p>
+          Elimine os padrões ocultos que te fazem atrair homens ruins{" "}
+          <span className="font-bold">
+            e construa um amor seguro, companheiro e próspero.
+          </span>
+        </p>
+      ),
+    },
+    {
+      id: "h5",
+      isPicture: false,
+      isLogo: true,
+      title: (
+        <p
+          className={`text-[#C0964B] lg:text-[34px] text-xl lg:leading-10 leading-7 font-semibold mb-1`}
+        >
+          O seu último relacionamento acabou mal?
+        </p>
+      ),
+      text: (
+        <p>
+          Eu sei que não foi a primeira vez. E não será a última se você
+          continuar com os padrões ocultos{" "}
+          <span className="font-bold">
+            que te impedem de encontrar um homem de valor.
+          </span>
+        </p>
+      ),
+    },
+    {
+      id: "h6",
+      isPicture: false,
+      isLogo: true,
+      title: (
+        <p
+          className={`text-white lg:text-[34px] text-xl lg:leading-10 leading-7 font-semibold mb-1`}
+        >
+          Se você sempre escolhe o cara errado, isso vai mudar agora!
+        </p>
+      ),
+      text: (
+        <p>
+          Descubra{" "}
+          <span className="font-bold">
+            como parar de atrair, aceitar e conviver
+          </span>{" "}
+          com homens ruins.
         </p>
       ),
     },
@@ -465,13 +533,8 @@ export default function Formv1() {
               </div>
 
               <p className="my-4 flex items-center text-white font-special-elite text-left lg:text-2xl text-sm sm:max-w-[60%] max-w-[390px] mx-auto md:mx-0">
-              {redLine ? (
-                <span>{redLine}</span>
-              ) : (
-                <>
-                </>
-              )}
-            </p>
+                {redLine ? <span>{redLine}</span> : <></>}
+              </p>
 
               <p className="lg:text-2xl text-sm text-left text-white font-special-elite mt-6 md:w-full w-[390px] md:mx-0 mx-auto">
                 Comprovado por mais de 53 mil mulheres.
