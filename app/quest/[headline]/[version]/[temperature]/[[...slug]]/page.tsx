@@ -53,7 +53,7 @@ export default function Quiz({ params }: { params: { form: string } }) {
       : "f";
     return mapTagSendFlow[resolvedKey as keyof typeof mapTagSendFlow] || mapTagSendFlow["f"];
   };
-
+  
   const launch = '[OFRR] [OUT25]'
 
   // Capturar o domínio da página
@@ -132,6 +132,8 @@ export default function Quiz({ params }: { params: { form: string } }) {
       } else {
         faixa = "Faixa D";
       }
+
+      if(answers[3] === 'masculino') faixa = 'Faixa D';
       
       // Prepare detailed answers with questions and selected options
       const detailedAnswers: Record<string, string> = {};

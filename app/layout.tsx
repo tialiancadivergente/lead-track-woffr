@@ -5,7 +5,7 @@ import { Spectral, Bebas_Neue, Special_Elite } from "next/font/google";
 import "./globals.css";
 import GoogleTagManager from "./components/GoogleTagManager";
 import MicrosoftClarity from "./components/MicrosoftClarity";
-const GTM_ID = "GTM-NC7GGZBX"; // Substitua pelo seu GTM ID
+const GTM_ID = "GTM-WNV8FX9J"; // Substitua pelo seu GTM ID
 
 const spectral = Spectral({
   subsets: ["latin"],
