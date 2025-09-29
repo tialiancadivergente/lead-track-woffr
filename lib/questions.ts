@@ -24,7 +24,7 @@ export const questions: Question[] = [
   },
   {
     id: 2,
-    question: "Qual é o seu nível de escolaridade?",
+    question: "Qual o seu nível de escolaridade?",
     options: [
       { value: "fundamental1", label: "Ensino Fundamental 1 (1º ao 5º ano)", weight: 16.45 },
       { value: "fundamental2", label: "Ensino Fundamental 2 (6º ao 9º ano)", weight: 22.88 },
