@@ -302,17 +302,27 @@ export default function QuestODP({ params }: { params: { form: string } }) {
     }
   };
 
-  // Função para lidar com o envio do formulário
+
   const onSubmit = async (data: FormData) => {
     try {
       setIsLoading(true);
       
       await new Promise(resolve => setTimeout(resolve, 2000));
       
-      // Verifica o totalScore para determinar a URL de redirecionamento
-      const redirectUrl = totalScore <= 21 
-        ? "https://odp.aliancadivergente.com.br/odp-v1-b"
-        : "https://odp.aliancadivergente.com.br/odp-v1-m";
+      const firstName = data.nome.split(' ')[0];
+      
+      const primeiraResposta = getLabelFromAnswer(1);
+      
+      const baseUrl = totalScore <= 21 
+        ? "https://odp.aliancadivergente.com.br/odp-v1-b/"
+        : "https://odp.aliancadivergente.com.br/odp-v1-m/";
+      
+      const params = new URLSearchParams({
+        ndl: firstName,
+        imp: primeiraResposta
+      });
+      
+      const redirectUrl = `${baseUrl}?${params.toString()}`;
       
       window.location.replace(redirectUrl);
     } catch (error) {

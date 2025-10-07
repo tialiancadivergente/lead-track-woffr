@@ -8,9 +8,18 @@ import useUserIP from "../hooks/useUserIP";
 const GoogleTagManager = () => {
     const userIp = useUserIP(); // Captura o IP no carregamento
     console.log('meu ip =>', userIp);
+    
     useEffect(() => {
-        const gtmId = 'GTM-WNV8FX9J';
-        console.log('gtmId ====> ', gtmId)
+        // Verifica o subdomínio
+        const hostname = window.location.hostname;
+        const subdomain = hostname.split('.')[0];
+        
+        // Define o GTM ID baseado no subdomínio
+        const gtmId = subdomain === 'odpr' ? 'GTM-KQWLTDD' : 'GTM-WNV8FX9J';
+        
+        console.log('subdomain ====> ', subdomain);
+        console.log('gtmId ====> ', gtmId);
+        
         TagManager.initialize({ gtmId });
     }, []);
 
