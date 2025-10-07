@@ -36,9 +36,7 @@ export function CustomInputRadio({ options, value, onChange, className, style }:
           
           {/* Conteúdo da opção */}
           <Label className={`
-            text-white cursor-pointer text-sm md:text-base font-medium
-            ${value === option.value ? "text-blue-50" : "text-white"}
-          `}>
+            text-white cursor-pointer text-sm md:text-base font-medium`}>
             {option.label}
           </Label>
         </div>

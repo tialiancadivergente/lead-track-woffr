@@ -13,6 +13,7 @@ import { Progress } from "@/components/ui/progress";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { phoneFormatter } from "@/lib/utils";
 
 const spectral = Spectral({
   subsets: ["latin"],
@@ -58,9 +59,16 @@ export default function QuestODP({ params }: { params: { form: string } }) {
     handleSubmit,
     formState: { errors, isSubmitting: isFormSubmitting },
     reset,
+    setValue,
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
   });
+
+  // Handler para formatar o telefone
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formattedPhone = phoneFormatter(e.target.value);
+    setValue("telefone", formattedPhone);
+  };
 
   const getLabelFromAnswer = (number: number) => {
     const answerValue = answers[number];
@@ -495,9 +503,10 @@ export default function QuestODP({ params }: { params: { form: string } }) {
                                 id="nome"
                                 className="w-full px-4 py-3 rounded-lg bg-[#0a1a1f] border border-[#C0964B] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0964B] focus:border-transparent"
                                 placeholder="Digite seu nome completo"
+                                required={false}
                               />
                               {errors.nome && (
-                                <p className="text-red-400 text-sm mt-1">{errors.nome.message}</p>
+                                <p className="text-red-500 text-sm mt-1">{errors.nome.message}</p>
                               )}
                             </div>
 
@@ -515,9 +524,10 @@ export default function QuestODP({ params }: { params: { form: string } }) {
                                 id="email"
                                 className="w-full px-4 py-3 rounded-lg bg-[#0a1a1f] border border-[#C0964B] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0964B] focus:border-transparent"
                                 placeholder="Digite seu e-mail"
+                                required={false}
                               />
                               {errors.email && (
-                                <p className="text-red-400 text-sm mt-1">{errors.email.message}</p>
+                                <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
                               )}
                             </div>
 
@@ -530,14 +540,19 @@ export default function QuestODP({ params }: { params: { form: string } }) {
                                 Telefone *
                               </label>
                               <input
-                                {...register("telefone")}
+                                {...register("telefone", {
+                                  onChange: handlePhoneChange
+                                })}
                                 type="tel"
                                 id="telefone"
                                 className="w-full px-4 py-3 rounded-lg bg-[#0a1a1f] border border-[#C0964B] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#C0964B] focus:border-transparent"
-                                placeholder="Digite seu telefone"
+                                placeholder="(00) 00000-0000"
+                                maxLength={15}
+                                // Remover validação nativa do HTML
+                                required={false}
                               />
                               {errors.telefone && (
-                                <p className="text-red-400 text-sm mt-1">{errors.telefone.message}</p>
+                                <p className="text-red-500 text-sm mt-1">{errors.telefone.message}</p>
                               )}
                             </div>
                           </div>
