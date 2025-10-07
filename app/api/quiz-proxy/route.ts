@@ -4,6 +4,10 @@ export async function POST(request: NextRequest) {
   try {
     // Get the data from the request
     const data = await request.json();
+
+    console.log('data', data);
+
+    
     
     // Forward the data to the external API
     const response = await fetch(
