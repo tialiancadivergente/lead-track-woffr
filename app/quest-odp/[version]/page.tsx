@@ -317,10 +317,12 @@ export default function QuestODP({ params }: { params: { form: string } }) {
         ? "https://odp.aliancadivergente.com.br/odp-v1-b/"
         : "https://odp.aliancadivergente.com.br/odp-v1-m/";
       
-      const params = new URLSearchParams({
-        ndl: firstName,
-        imp: primeiraResposta
-      });
+      // Criar um novo URLSearchParams com os parâmetros da URL atual
+      const params = new URLSearchParams(searchParams?.toString() || '');
+      
+      // Adicionar ou sobrescrever os novos parâmetros
+      params.set('ndl', firstName);
+      params.set('imp', primeiraResposta);
       
       const redirectUrl = `${baseUrl}?${params.toString()}`;
       

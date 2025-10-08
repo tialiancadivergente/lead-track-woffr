@@ -271,22 +271,17 @@ export default function Formv1() {
     const basePath = `/quest-odp/${params.version}`;
 
     // Iniciar com os parâmetros de email e telefone
-    // const queryParams = new URLSearchParams();
-    // queryParams.append("email", email);
-    // queryParams.append(
-    //   "phone",
-    //   `${ddi}${whatsapp.replace(/\s+|-|\(|\)|\./g, "")}`
-    // );
+    const queryParams = new URLSearchParams();
 
     // Adicionar UTMs se existirem
-    // if (formFields) {
-    //   Object.entries(formFields).forEach(([key, value]) => {
-    //     queryParams.append(key, value);
-    //   });
-    // }
+    if (formFields) {
+      Object.entries(formFields).forEach(([key, value]) => {
+        queryParams.append(key, value);
+      });
+    }
 
     // Construir a URL completa
-    return `${basePath}`;
+    return `${basePath}?${queryParams.toString()}`;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
