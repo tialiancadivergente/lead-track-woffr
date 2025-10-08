@@ -310,7 +310,9 @@ export default function QuestODP({ params }: { params: { form: string } }) {
       await new Promise(resolve => setTimeout(resolve, 2000));
       
       const firstName = data.nome.split(' ')[0];
-      const firstNameCapitalized = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
+      const firstNameCapitalized = firstName
+        ? firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase()
+        : "";
       
       const primeiraResposta = getLabelFromAnswer(1);
       
