@@ -310,6 +310,7 @@ export default function QuestODP({ params }: { params: { form: string } }) {
       await new Promise(resolve => setTimeout(resolve, 2000));
       
       const firstName = data.nome.split(' ')[0];
+      const firstNameCapitalized = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
       
       const primeiraResposta = getLabelFromAnswer(1);
       
@@ -321,7 +322,7 @@ export default function QuestODP({ params }: { params: { form: string } }) {
       const params = new URLSearchParams(searchParams?.toString() || '');
       
       // Adicionar ou sobrescrever os novos parâmetros
-      params.set('ndl', firstName);
+      params.set('ndl', firstNameCapitalized);
       params.set('imp', primeiraResposta);
       
       const redirectUrl = `${baseUrl}?${params.toString()}`;
