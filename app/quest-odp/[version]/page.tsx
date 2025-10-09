@@ -297,8 +297,6 @@ export default function QuestODP({ params }: { params: { form: string } }) {
       );
       setHasSent(true);
       window.location.replace(redirectUrl);
-    } finally {
-      setIsLoading(false);
     }
   };
 
