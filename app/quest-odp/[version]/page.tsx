@@ -115,119 +115,188 @@ export default function QuestODP({ params }: { params: { form: string } }) {
     }
   };
 
+  // Função auxiliar para capitalizar o primeiro nome
+  const capitalizeFirstName = (fullName: string): string => {
+    const firstName = fullName.split(" ")[0];
+    return firstName
+      ? firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase()
+      : "";
+  };
+
+  // Função auxiliar para determinar a faixa com base no score
+  const getFaixa = (score: number): string => {
+    return score > 21 ? "Faixa M" : "Faixa B";
+  };
+
+  // Função auxiliar para obter a URL base de redirecionamento
+  const getBaseUrl = (score: number): string => {
+    return score <= 21
+      ? "https://odp.aliancadivergente.com.br/odp-v1-b/"
+      : "https://odp.aliancadivergente.com.br/odp-v1-m/";
+  };
+
+  // Função auxiliar para construir a URL de redirecionamento
+  const buildRedirectUrl = (
+    baseUrl: string,
+    firstName: string,
+    firstAnswer: string
+  ): string => {
+    const params = new URLSearchParams(searchParams?.toString() || "");
+    params.set("ndl", firstName);
+    params.set("imp", firstAnswer);
+    return `${baseUrl}?${params.toString()}`;
+  };
+
+  // Função auxiliar para preparar respostas detalhadas
+  const prepareDetailedAnswers = (): Record<string, string> => {
+    const detailedAnswers: Record<string, string> = {};
+    
+    Object.entries(answers).forEach(([questionId, answerValue]) => {
+      const questionObj = questionsOdp.find(
+        (q) => q.id === parseInt(questionId)
+      );
+      const selectedOption = questionObj?.options.find(
+        (opt) => opt.value === answerValue
+      );
+
+      if (questionObj) {
+        detailedAnswers[questionObj.question] =
+          selectedOption?.label || answerValue;
+      }
+    });
+
+    return detailedAnswers;
+  };
+
+  // Função auxiliar para obter parâmetros UTM
+  const getUtmParams = () => ({
+    utm_source: searchParams.get("utm_source") || "",
+    utm_medium: searchParams.get("utm_medium") || "",
+    utm_campaign: searchParams.get("utm_campaign") || "",
+    utm_content: searchParams.get("utm_content") || "",
+    utm_term: searchParams.get("utm_term") || "",
+  });
+
+  // Função auxiliar para enviar dados ao GTM
+  const sendToGTM = (gtmData: Record<string, any>) => {
+    TagManager.dataLayer?.({
+      dataLayer: {
+        event: "leadscore",
+        ...gtmData,
+      },
+    });
+  };
+
+  // Função auxiliar para registrar o lead
+  const registerLead = async (email: string, phone: string) => {
+    const response = await fetch("/api/register-lead", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, phone }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Falha ao registrar lead");
+    }
+
+    return response;
+  };
+
+  // Função auxiliar para enviar dados ao quiz proxy
+  const sendToQuizProxy = async (payload: Record<string, any>) => {
+    try {
+      const response = await fetch("/api/quiz-proxy", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      
+      const data = await response.json();
+      console.log("Success:", data);
+      return data;
+    } catch (error) {
+      console.error("Error:", error);
+      throw error;
+    }
+  };
+
   const onSubmit = async (data: FormData) => {
+    // Validações iniciais
+    if (!completed || hasSent) {
+      return;
+    }
+
     try {
       setIsLoading(true);
 
+      // Simulação de delay para melhor UX
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      const firstName = data.nome.split(" ")[0];
-      const firstNameCapitalized = firstName
-        ? firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase()
-        : "";
-
+      // Preparar dados básicos
+      const firstNameCapitalized = capitalizeFirstName(data.nome);
       const primeiraResposta = getLabelFromAnswer(1);
+      const faixa = getFaixa(totalScore);
+      const baseUrl = getBaseUrl(totalScore);
+      const redirectUrl = buildRedirectUrl(
+        baseUrl,
+        firstNameCapitalized,
+        primeiraResposta
+      );
 
-      const baseUrl =
-        totalScore <= 21
-          ? "https://odp.aliancadivergente.com.br/odp-v1-b/"
-          : "https://odp.aliancadivergente.com.br/odp-v1-m/";
+      // Preparar respostas detalhadas
+      const detailedAnswers = prepareDetailedAnswers();
 
-      // Criar um novo URLSearchParams com os parâmetros da URL atual
-      const params = new URLSearchParams(searchParams?.toString() || "");
+      // Preparar dados para GTM
+      const gtmData = {
+        email: data.email,
+        phone: data.telefone,
+        answers: answers,
+        totalScore: Math.round(totalScore),
+        faixa: faixa,
+        tipo: "",
+        version: versao,
+        temperature: "",
+      };
 
-      // Adicionar ou sobrescrever os novos parâmetros
-      params.set("ndl", firstNameCapitalized);
-      params.set("imp", primeiraResposta);
+      // Preparar payload completo
+      const payload = {
+        ...gtmData,
+        detailedAnswers: detailedAnswers,
+        domain: domain,
+        launch: launch,
+        ...getUtmParams(),
+        path: window.location.pathname,
+      };
 
-      const redirectUrl = `${baseUrl}?${params.toString()}`;
+      // Enviar para GTM
+      sendToGTM(gtmData);
 
-      if (!completed || hasSent) {
-        return;
-      }
-      if (completed) {
-        const emailParam = data.email;
-        const phoneParam = data.telefone;
+      // Registrar lead
+      await registerLead(data.email, data.telefone);
 
-        // Calculate the faixa based on totalScore
-        let faixa;
-        if (totalScore > 21) {
-          faixa = "Faixa M";
-        } else {
-          faixa = "Faixa B";
-        }
-
-        // Prepare detailed answers with questions and selected options
-        const detailedAnswers: Record<string, string> = {};
-        Object.entries(answers).forEach(([questionId, answerValue]) => {
-          const questionObj = questionsOdp.find(
-            (q) => q.id === parseInt(questionId)
-          );
-          const selectedOption = questionObj?.options.find(
-            (opt) => opt.value === answerValue
-          );
-
-          if (questionObj) {
-            detailedAnswers[questionObj.question] =
-              selectedOption?.label || answerValue;
-          }
-        });
-
-        // Prepare the data to be sent to GTM
-        const gtmData = {
-          email: emailParam,
-          phone: phoneParam,
-          answers: answers,
-          totalScore: Math.round(totalScore),
-          faixa: faixa,
-          tipo: "",
-          version: versao,
-          temperature: "",
-        };
-
-        const payload = {
-          ...gtmData,
-          detailedAnswers: detailedAnswers,
-          domain: domain,
-          launch: launch,
-          utm_source: searchParams.get("utm_source") || "",
-          utm_medium: searchParams.get("utm_medium") || "",
-          utm_campaign: searchParams.get("utm_campaign") || "",
-          utm_content: searchParams.get("utm_content") || "",
-          utm_term: searchParams.get("utm_term") || "",
-          path: window.location.pathname,
-        };
-
-        // Still send to GTM as before
-        TagManager.dataLayer?.({
-          dataLayer: {
-            event: "leadscore",
-            ...gtmData,
-          },
-        });
-
-        // Send data to our proxy API
-        fetch("/api/quiz-proxy", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log("Success:", data);
-            setHasSent(true);
-            window.location.replace(redirectUrl);
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-            setHasSent(true);
-            window.location.replace(redirectUrl);
-          });
-      }
+      // Enviar para quiz proxy e redirecionar
+      // Não aguardamos a resposta para não bloquear o redirecionamento
+      sendToQuizProxy(payload).finally(() => {
+        setHasSent(true);
+        window.location.replace(redirectUrl);
+      });
     } catch (error) {
       console.error("Erro ao enviar formulário:", error);
+      // Em caso de erro, ainda tentamos redirecionar o usuário
+      const baseUrl = getBaseUrl(totalScore);
+      const firstNameCapitalized = capitalizeFirstName(data.nome);
+      const primeiraResposta = getLabelFromAnswer(1);
+      const redirectUrl = buildRedirectUrl(
+        baseUrl,
+        firstNameCapitalized,
+        primeiraResposta
+      );
+      setHasSent(true);
+      window.location.replace(redirectUrl);
     } finally {
       setIsLoading(false);
     }
