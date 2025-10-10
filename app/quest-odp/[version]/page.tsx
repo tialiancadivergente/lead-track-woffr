@@ -63,7 +63,7 @@ export default function QuestODP({ params }: { params: { form: string } }) {
     return option ? option.label : "";
   };
 
-  const launch = "[ODP] 2025";
+  const launch = totalScore <= 21 ? "[ODP] [OUT25] BAIXA PERMISSAO" : "[ODP] [OUT25] MEDIA PERMISSAO";
 
   // Capturar o domínio da página
   useEffect(() => {
@@ -267,7 +267,7 @@ export default function QuestODP({ params }: { params: { form: string } }) {
         ...gtmData,
         detailedAnswers: detailedAnswers,
         domain: domain,
-        launch: launch,
+        launch,
         ...getUtmParams(),
         path: window.location.pathname,
       };
@@ -277,7 +277,7 @@ export default function QuestODP({ params }: { params: { form: string } }) {
         parametroCompleto: `${versao}-${faixa}`,
         domain: domain,
         uri: domain,
-        launch: launch,
+        launch,
         path: window.location.pathname,
         formFields: getUtmParams(),
       };
