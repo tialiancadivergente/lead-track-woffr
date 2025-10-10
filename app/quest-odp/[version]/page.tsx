@@ -292,7 +292,7 @@ export default function QuestODP({ params }: { params: { form: string } }) {
       // Não aguardamos a resposta para não bloquear o redirecionamento
       sendToQuizProxy(payload).finally(() => {
         setHasSent(true);
-        // window.location.replace(redirectUrl);
+        window.location.replace(redirectUrl);
       });
     } catch (error) {
       console.error("Erro ao enviar formulário:", error);
@@ -306,7 +306,7 @@ export default function QuestODP({ params }: { params: { form: string } }) {
         primeiraResposta
       );
       setHasSent(true);
-      // window.location.replace(redirectUrl);
+      window.location.replace(redirectUrl);
     }
   };
 
