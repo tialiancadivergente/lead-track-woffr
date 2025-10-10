@@ -188,13 +188,13 @@ export default function QuestODP({ params }: { params: { form: string } }) {
   };
 
   // Função auxiliar para registrar o lead
-  const registerLead = async (email: string, phone: string) => {
+  const registerLead = async (leadPayload: Record<string, any>) => {
     const response = await fetch("/api/register-lead", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, phone }),
+      body: JSON.stringify(leadPayload),
     });
 
     if (!response.ok) {
@@ -259,7 +259,7 @@ export default function QuestODP({ params }: { params: { form: string } }) {
         faixa: faixa,
         tipo: "",
         version: versao,
-        temperature: "",
+        temperature: totalScore <= 21 ? "f" : "m",
       };
 
       // Preparar payload completo
@@ -272,17 +272,27 @@ export default function QuestODP({ params }: { params: { form: string } }) {
         path: window.location.pathname,
       };
 
+      const leadPayload = {
+        ...gtmData,
+        parametroCompleto: `${versao}-${faixa}`,
+        domain: domain,
+        uri: domain,
+        launch: launch,
+        path: window.location.pathname,
+        formFields: getUtmParams(),
+      };
+
       // Enviar para GTM
       sendToGTM(gtmData);
 
       // Registrar lead
-      await registerLead(data.email, data.telefone);
+      await registerLead(leadPayload);
 
       // Enviar para quiz proxy e redirecionar
       // Não aguardamos a resposta para não bloquear o redirecionamento
       sendToQuizProxy(payload).finally(() => {
         setHasSent(true);
-        window.location.replace(redirectUrl);
+        // window.location.replace(redirectUrl);
       });
     } catch (error) {
       console.error("Erro ao enviar formulário:", error);
@@ -296,7 +306,7 @@ export default function QuestODP({ params }: { params: { form: string } }) {
         primeiraResposta
       );
       setHasSent(true);
-      window.location.replace(redirectUrl);
+      // window.location.replace(redirectUrl);
     }
   };
 
