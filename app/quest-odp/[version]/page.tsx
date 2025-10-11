@@ -269,7 +269,6 @@ export default function QuestODP({ params }: { params: { form: string } }) {
         detailedAnswers: detailedAnswers,
         domain: domain,
         launch,
-        tagId,
         ...getUtmParams(),
         path: window.location.pathname,
       };
@@ -280,6 +279,7 @@ export default function QuestODP({ params }: { params: { form: string } }) {
         domain: domain,
         uri: domain,
         launch,
+        tagId,
         path: window.location.pathname,
         formFields: getUtmParams(),
       };
