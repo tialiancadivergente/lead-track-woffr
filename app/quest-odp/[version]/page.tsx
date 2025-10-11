@@ -64,6 +64,7 @@ export default function QuestODP({ params }: { params: { form: string } }) {
   };
 
   const launch = totalScore <= 21 ? "[ODP] [OUT25] BAIXA PERMISSAO" : "[ODP] [OUT25] MEDIA PERMISSAO";
+  const tagId: number = totalScore <= 21 ? 120042 : 120043;
 
   // Capturar o domínio da página
   useEffect(() => {
@@ -259,7 +260,7 @@ export default function QuestODP({ params }: { params: { form: string } }) {
         faixa: faixa,
         tipo: "",
         version: versao,
-        temperature: totalScore <= 21 ? "f" : "m",
+        temperature: totalScore <= 21 ? "b" : "m",
       };
 
       // Preparar payload completo
@@ -268,6 +269,7 @@ export default function QuestODP({ params }: { params: { form: string } }) {
         detailedAnswers: detailedAnswers,
         domain: domain,
         launch,
+        tagId,
         ...getUtmParams(),
         path: window.location.pathname,
       };
