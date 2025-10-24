@@ -39,10 +39,9 @@ export default function Quiz({ params }: { params: { form: string } }) {
   const [hasSent, setHasSent] = useState(false);
 
 	const mapTagSendFlow = useCallback(() => ({
-		f: "https://sndflw.com/i/ofrrf-out25",
-		org: "https://sndflw.com/i/ofrro-out25",
-		m: "https://sndflw.com/i/ofrrm-out25",
-		q: "https://sndflw.com/i/ofrrq-out25",
+		f: "https://sendflow.click/i/ofrrnov25f",
+		org: "https://sendflow.click/i/ofrrnov25o",
+		q: "https://sendflow.click/i/ofrrnov25q",
 	}), [_params.slug])();
 
   const getWhatsappUrl = () => {
@@ -54,7 +53,7 @@ export default function Quiz({ params }: { params: { form: string } }) {
     return mapTagSendFlow[resolvedKey as keyof typeof mapTagSendFlow] || mapTagSendFlow["f"];
   };
   
-  const launch = '[OFRR] [OUT25]'
+  const launch = '[OFRR] [NOV25]'
 
   // Capturar o domínio da página
   useEffect(() => {

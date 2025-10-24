@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { Ban, CreditCard, MonitorSmartphone, Phone } from "lucide-react";
 import Image from "next/image";
 import { useParams, useSearchParams, useRouter } from "next/navigation";
+import { getTagIdByTemperature } from "@/lib/temperature-utils";
 
 export default function Formv1() {
   const params = useParams();
@@ -29,10 +30,11 @@ export default function Formv1() {
   const [isLogo, setIsLogo] = useState(true);
   const [isDark, setIsDark] = useState(true);
   const [isPicture, setIsPicture] = useState(false);
+  const [tagId, setTagId] = useState<number | null>(null);
 
   const fullUrl = Object.values(params).flat().join("/");
 
-  const launch = '[OFRR] [OUT25]'
+  const launch = '[OFRR] [NOV25]'
 
   // Capturar o domínio da página
   useEffect(() => {
@@ -262,6 +264,11 @@ export default function Formv1() {
       setTipo(tipoValue);
       setVersao(versaoValue as string);
       setTemperatura(temperaturaValue as string);
+      
+      // Definir tagId baseado na temperatura
+      const calculatedTagId = getTagIdByTemperature(temperaturaValue as string);
+      setTagId(calculatedTagId);
+      console.log("TagId definido:", calculatedTagId);
     }
   }, [params]);
 
@@ -310,6 +317,8 @@ export default function Formv1() {
         parametroCompleto: fullUrl,
         domain,
         uri: domain,
+        tagId: tagId,
+        launch: launch,
         path: window.location.pathname,
       };
 
@@ -337,7 +346,8 @@ export default function Formv1() {
         temperature: temperatura,
         tipo,
         version: versao,
-        launch,
+        launch: launch,
+        tagId: tagId,
         domain,
         parametroCompleto: fullUrl,
         date: new Date().toISOString(),
@@ -525,7 +535,7 @@ export default function Formv1() {
                 Comprovado por mais de 53 mil mulheres.
               </p>
               <p className="lg:text-2xl text-[14px] text-left text-[#C0964B] font-semibold mb-6 md:w-full w-[390px] md:mx-0 mx-auto">
-                06, 07 e 08 de outubro - às 20h (Horário de Brasília)
+                03, 04 e 05 de novembro - às 20h (Horário de Brasília)
               </p>
 
               <form
