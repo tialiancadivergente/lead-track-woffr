@@ -115,4 +115,12 @@ export const questions: Question[] = [
       { value: "Nunca fiz", label: "Nunca fiz", weight: 0 },
     ],
   },
+  {
+    id: 11,
+    question: "Você já faz parte da Aliança Divergente?",
+    options: [
+      { value: "sim", label: "Sim", weight: 0 },
+      { value: "nao", label: "Não", weight: 0 },
+    ],
+  },
 ];
