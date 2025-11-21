@@ -63,8 +63,8 @@ export default function QuestODP({ params }: { params: { form: string } }) {
     return option ? option.label : "";
   };
 
-  const launch = totalScore <= 21 ? "[ODP] [OUT25] BAIXA PERMISSAO" : "[ODP] [OUT25] MEDIA PERMISSAO";
-  const tagId: number = totalScore <= 21 ? 120042 : 120043;
+  const launch = totalScore <= 21 ? "[ODP] [NOV25] BAIXA PERMISSAO" : "[ODP] [NOV25] MEDIA PERMISSAO";
+  const tagId: number = totalScore <= 21 ? 120304 : 120305;
 
   // Capturar o domínio da página
   useEffect(() => {
