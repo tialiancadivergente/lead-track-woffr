@@ -5,6 +5,7 @@ import { Spectral, Bebas_Neue, Special_Elite } from "next/font/google";
 import "./globals.css";
 import GoogleTagManager from "./components/GoogleTagManager";
 import MicrosoftClarity from "./components/MicrosoftClarity";
+import AliancaScript from "./components/AliancaScript";
 const GTM_ID = "GTM-WNV8FX9J"; // Substitua pelo seu GTM ID
 
 const spectral = Spectral({
@@ -77,6 +78,7 @@ export default function RootLayout({
       >
         <GoogleTagManager />
         <MicrosoftClarity />
+        <AliancaScript />
         {children}
       </body>
     </html>
